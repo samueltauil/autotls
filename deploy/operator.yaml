@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autotls
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: autotls
+  template:
+    metadata:
+      labels:
+        name: autotls
+    spec:
+      serviceAccountName: autotls
+      containers:
+        - name: autotls
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          command:
+          - autotls
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "autotls"
