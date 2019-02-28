@@ -1,0 +1,7 @@
+apiVersion: autotls.redhat.com/v1alpha1
+kind: AutoTLS
+metadata:
+  name: example-autotls
+spec:
+  # Add fields here
+  size: 3
